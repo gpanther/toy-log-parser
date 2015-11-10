@@ -1,12 +1,15 @@
 package net.greypanther.logparser;
 
 import java.net.InetAddress;
-import java.net.URI;
+import java.net.URL;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.NotThreadSafe;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.google.common.net.InternetDomainName;
 
@@ -16,7 +19,8 @@ import nl.basjes.parse.httpdlog.ApacheHttpdLoglineParser;
 
 @NotThreadSafe
 public final class Parser {
-	private static final String APACHE_LOG_FORMAT = "%h %l %u %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\" 1";
+	private static final Logger LOG = LoggerFactory.getLogger(Parser.class);
+	private static final String APACHE_LOG_FORMAT = "%h %l %u %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\" %k";
 
 	private final nl.basjes.parse.core.Parser<LogRecord> parser = new ApacheHttpdLoglineParser<>(LogRecord.class,
 			APACHE_LOG_FORMAT);
@@ -26,8 +30,13 @@ public final class Parser {
 	@SneakyThrows
 	public LogEntry parse(@Nonnull String line) {
 		record.clear();
-		parser.parse(record, line);
-		return record.toLogEntry();
+		try {
+			parser.parse(record, line);
+			return record.toLogEntry();
+		} catch (Exception ex) {
+			LOG.error("Exception while parsing line:\n" + line, ex);
+			return null;
+		}
 	}
 
 	public final static class LogRecord {
@@ -77,7 +86,7 @@ public final class Parser {
 
 		@SneakyThrows
 		private LogEntry toLogEntry() {
-			String host = URI.create(referer).getHost();
+			String host = new URL(referer).getHost();
 			InternetDomainName domain = InternetDomainName.from(host).topPrivateDomain();
 
 			return new LogEntry(InetAddress.getByName(ip),

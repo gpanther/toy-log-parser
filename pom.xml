@@ -13,10 +13,14 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<!-- Use a RC to get the updated public suffix list -->
+		<google.guava.version>19.0-rc2</google.guava.version>
+		<lombok.version>1.16.6</lombok.version>
 	</properties>
 
 	<modules>
 		<module>parser</module>
+		<module>in-memory</module>
 	</modules>
 
 	<dependencies>
@@ -24,6 +28,16 @@
 			<groupId>net.sourceforge.findbugs</groupId>
 			<artifactId>jsr305</artifactId>
 			<version>1.3.7</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.7.12</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-simple</artifactId>
+			<version>1.7.12</version>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
@@ -45,8 +59,33 @@
 					<target>1.8</target>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-shade-plugin</artifactId>
+				<version>2.4.2</version>
+				<configuration>
+					<filters>
+						<filter>
+							<!-- Remove signatures from signed jars because merging the jars invalidates 
+								them -->
+							<artifact>*:*</artifact>
+							<excludes>
+								<exclude>META-INF/*.SF</exclude>
+								<exclude>META-INF/*.DSA</exclude>
+								<exclude>META-INF/*.RSA</exclude>
+							</excludes>
+						</filter>
+					</filters>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>shade</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
-
-
 </project>

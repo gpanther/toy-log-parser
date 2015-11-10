@@ -7,32 +7,24 @@
 	</parent>
 
 	<modelVersion>4.0.0</modelVersion>
-	<artifactId>parser</artifactId>
+	<artifactId>in-memory</artifactId>
 	<packaging>jar</packaging>
 
 	<dependencies>
 		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<version>${lombok.version}</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>nl.basjes.parse.httpdlog</groupId>
-			<artifactId>httpdlog-parser</artifactId>
-			<version>2.3</version>
-		</dependency>
-		<!-- This is dependency of httpdlog-parser, not explicity defined in its 
-			pom :-( -->
-		<dependency>
-			<groupId>joda-time</groupId>
-			<artifactId>joda-time</artifactId>
-			<version>2.9</version>
+			<groupId>net.greypanther.logparser</groupId>
+			<artifactId>parser</artifactId>
+			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
 			<version>${google.guava.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>2.4</version>
 		</dependency>
 	</dependencies>
 </project>
