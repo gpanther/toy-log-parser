@@ -16,11 +16,15 @@
 		<!-- Use a RC to get the updated public suffix list -->
 		<google.guava.version>19.0-rc2</google.guava.version>
 		<lombok.version>1.16.6</lombok.version>
+		<spring.jdbc.version>4.2.2.RELEASE</spring.jdbc.version>
 	</properties>
 
 	<modules>
 		<module>parser</module>
 		<module>in-memory</module>
+		<module>input-utils</module>
+		<module>db-common</module>
+		<module>db-loader</module>
 	</modules>
 
 	<dependencies>

@@ -7,7 +7,7 @@
 	</parent>
 
 	<modelVersion>4.0.0</modelVersion>
-	<artifactId>in-memory</artifactId>
+	<artifactId>db-loader</artifactId>
 	<packaging>jar</packaging>
 
 	<dependencies>
@@ -17,14 +17,19 @@
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
+			<groupId>net.greypanther.logparser</groupId>
+			<artifactId>db-common</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
 			<version>${google.guava.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>com.google.code.gson</groupId>
-			<artifactId>gson</artifactId>
-			<version>2.4</version>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+			<version>${spring.jdbc.version}</version>
 		</dependency>
 	</dependencies>
 </project>

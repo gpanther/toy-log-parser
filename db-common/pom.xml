@@ -7,24 +7,20 @@
 	</parent>
 
 	<modelVersion>4.0.0</modelVersion>
-	<artifactId>in-memory</artifactId>
+	<artifactId>db-common</artifactId>
 	<packaging>jar</packaging>
 
 	<dependencies>
 		<dependency>
-			<groupId>net.greypanther.logparser</groupId>
-			<artifactId>input-utils</artifactId>
-			<version>${project.version}</version>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>${lombok.version}</version>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
-			<groupId>com.google.guava</groupId>
-			<artifactId>guava</artifactId>
-			<version>${google.guava.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.google.code.gson</groupId>
-			<artifactId>gson</artifactId>
-			<version>2.4</version>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>9.4-1205-jdbc42</version>
 		</dependency>
 	</dependencies>
 </project>
