@@ -35,16 +35,17 @@ To run the variant using DB:
   WITH (
     OIDS=FALSE
   );
+  ````
 
 * Update the `ConnectionSource` class in the `db-common` module so that it has the right server / user / password / database URL to connect to the above database
 * mvn package
-* import the files into the database: \
+* import the files into the database:
   `java -cp ./db-loader/target/db-loader-1.0-SNAPSHOT.jar net.greypanther.logparser.db.loader.Main [file(s) to parse]`
   * the `[file(s) to parse]` can be one or more files (provided via their paths or using the `file://` URL scheme) or URLs (in which case it will stream the file from the given URL)
   * if the filename / URL ends in `.gz`, the program will transparently decompress it
   * output and logging is printed to standard out
   * expected runtime: ~2.5 hours for 10 files
-* generate the report from the imported data: \
+* generate the report from the imported data:
   `java -cp ./db-report/target/db-report-1.0-SNAPSHOT.jar net.greypanther.logparser.db.report.Main`
   * expected runtime: < 1min
 
@@ -62,7 +63,7 @@ Finally, having a database means that we need some operational resources (ie. st
 
 ## Known issues / possible improvements
 
-* There are less than 0.5% of lines (16 932) which could not be parsed. Most of it seems to be due to them having multiple IPs in the "client IP" are: \
+* There are less than 0.5% of lines (16 932) which could not be parsed. Most of it seems to be due to them having multiple IPs in the "client IP" are:
   `106.215.179.80, 37.228.104.86 -  -  [05/Apr/2015:13:49:32 +0000] "GET /v1/i...`
   * we need to understand why this is happening (are those clients coming through some kind of proxy?) and account for it
 
