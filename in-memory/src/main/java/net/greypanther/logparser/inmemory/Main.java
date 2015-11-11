@@ -32,11 +32,11 @@ public class Main {
 		}
 		System.out.println();
 
-		System.out.format("Uniuqe URLS (%d):%n", collector.getUniqueUrls().size());
+		System.out.format("Unique URLS (%d):%n", collector.getUniqueUrls().size());
 		collector.getUniqueUrls().stream().forEach(System.out::println);
 		System.out.println();
 
-		System.out.format("Uniuqe user agents (%d):%n", collector.getUniqueUserAgents().size());
+		System.out.format("Unique user agents (%d):%n", collector.getUniqueUserAgents().size());
 		collector.getUniqueUserAgents().stream().forEach(System.out::println);
 		System.out.println();
 	}

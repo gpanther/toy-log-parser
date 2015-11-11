@@ -25,6 +25,7 @@
 		<module>input-utils</module>
 		<module>db-common</module>
 		<module>db-loader</module>
+		<module>db-report</module>
 	</modules>
 
 	<dependencies>
