@@ -53,7 +53,7 @@ To run the variant using DB:
 
 The parser uses the [httpdlog-parser](https://github.com/nielsbasjes/logparser) library as a first step for parsing and then uses the built-in java date/time classes and URI/URL classes for further parsing. It also uses Google Guava to extract the domains from the host names of the referrer URLs (so that it extracts `example.co.uk` from `www.example.co.uk` instead of `co.uk`). This last step is based on [the public suffix list](https://publicsuffix.org/) and will need periodic updating.
 
-For database access it Spring JdbcTemplate and for logging it uses SLF4J.
+For database access it Spring JdbcTemplate and for logging it uses SLF4J. It uses [Project Lombok](https://projectlombok.org/) to generate some of the getters / setters (this is important if you try to build it from inside of your IDE - you need to have [the corresponding plugin installed](https://projectlombok.org/download.html), otherwise it won't work - it works fine however from the command line without any extra configurations).
 
 For this problem in particular it probably makes more sense to go with the "parse everything at once and generate the statistics in memory" since it has a better runtime and gives more flexibility (for example if we fix some of the parse errors, we can just re-run the process and have the previously excluded lines be included).
 
